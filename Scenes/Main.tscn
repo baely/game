@@ -1,9 +1,14 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilemap/Tilemap.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/DayNightCycle.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Environment.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Props.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/WindController.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/Background.cs" type="Script" id=5]
 [ext_resource path="res://Assets/sprites/spr_deco_sheep_01_strip4.png" type="Texture" id=6]
 [ext_resource path="res://Assets/sprites/spr_deco_duck_01_strip4.png" type="Texture" id=7]
@@ -1023,6 +1028,14 @@ animations = [ {
 
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
+<<<<<<< Updated upstream
+=======
+
+[node name="WindController" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+>>>>>>> Stashed changes
 script = ExtResource( 4 )
 
 [node name="Background" type="TileMap" parent="."]
@@ -1042,6 +1055,34 @@ format = 1
 tile_data = PoolIntArray( 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 26, 0, 131081, 26, 0, 131082, 26, 0, 131083, 26, 0, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 196613, 26, 0, 196614, 26, 0, 196615, 26, 0, 196616, 26, 0, 196617, 26, 0, 196618, 26, 0, 196619, 26, 0, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 262149, 26, 0, 262150, 26, 0, 262151, 26, 0, 262152, 25, 0, 262153, 25, 1, 262154, 25, 1, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 524293, 26, 0, 524294, 26, 0, 524295, 26, 0, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0 )
 script = SubResource( 56 )
 
+[node name="Decorations" type="TileMap" parent="."]
+position = Vector2( -193, -62 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65540, 11, 0, 65551, 11, 0, 131078, 13, 0, 131079, 13, 1, 131080, 13, 1, 131081, 13, 2, 131086, 15, 0, 196613, 15, 0, 196614, 13, 65536, 196615, 13, 65537, 196616, 13, 65537, 196617, 13, 65538, 196623, 11, 0, 262149, 13, 0, 262150, 13, 65537, 262151, 13, 65537, 262159, 15, 0, 327684, 11, 0, 327694, 13, 0, 327695, 13, 2, 393229, 15, 0, 393230, 13, 65536, 393231, 13, 65538, 458756, 15, 0, 458766, 13, 131072, 458767, 13, 131074, 524292, 11, 0, 524303, 11, 0, 589828, 15, 0, 589838, 11, 0 )
+
+[node name="Trees" type="TileMap" parent="."]
+position = Vector2( -193, -62 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65541, 24, 0, 65542, 24, 1, 65543, 24, 1, 65544, 24, 1, 65545, 24, 1, 65546, 24, 1, 65547, 24, 1, 65548, 24, 1, 65549, 24, 1, 65550, 24, 2, 589829, 24, 0, 589830, 24, 1, 589831, 24, 1, 589832, 24, 1, 589833, 24, 1, 589834, 24, 1, 589835, 24, 1, 589836, 24, 1, 589837, 24, 1, 589838, 24, 2 )
+
+[node name="Paths" type="TileMap" parent="."]
+position = Vector2( -193, -62 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 196614, 14, 0, 196615, 14, 1, 196616, 14, 1, 196617, 14, 2, 262150, 14, 65536, 262151, 14, 65537, 262152, 14, 65537, 262153, 14, 65538, 327686, 14, 131072, 327687, 14, 131073, 327688, 14, 131073, 327689, 14, 131074, 458761, 14, 0, 458762, 14, 1, 458763, 14, 2, 524297, 14, 131072, 524298, 14, 131073, 524299, 14, 131074 )
+
+[node name="Flowers" type="TileMap" parent="."]
+position = Vector2( -193, -62 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 131077, 12, 0, 131086, 12, 1, 262150, 12, 1, 262158, 12, 0, 393222, 12, 1, 393229, 12, 0, 524294, 12, 0, 524301, 12, 1 )
+
 [node name="Character" type="AnimatedSprite" parent="."]
 position = Vector2( 127, 98 )
 frames = SubResource( 25 )
@@ -1053,6 +1094,45 @@ script = ExtResource( 1 )
 position = Vector2( 0, 15 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
+<<<<<<< Updated upstream
+=======
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+position = Vector2( 0, 4 )
+shape = SubResource( 6 )
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="Props" parent="." instance=ExtResource( 7 )]
+position = Vector2( 127, 98 )
+
+[node name="Environment" parent="." instance=ExtResource( 6 )]
+position = Vector2( 127, 98 )
+
+[node name="Lily Pads" type="TileMap" parent="."]
+position = Vector2( -193, -62 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 131077, 22, 0, 131086, 22, 1, 589829, 22, 0, 589838, 22, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="AudioManager" type="Node" parent="."]
+
+[node name="AmbientNature" type="AudioStreamPlayer" parent="AudioManager"]
+volume_db = -20.0
+autoplay = true
+
+[node name="WaterSounds" type="AudioStreamPlayer2D" parent="AudioManager"]
+position = Vector2( 127, 98 )
+volume_db = -15.0
+max_distance = 300.0
+attenuation = 2.0
+
+[node name="WeatherSounds" type="AudioStreamPlayer" parent="AudioManager"]
+volume_db = -10.0
+>>>>>>> Stashed changes
 
 [node name="Node" type="Node" parent="."]
 
