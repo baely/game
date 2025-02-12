@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
@@ -9,29 +9,6 @@
 [ext_resource path="res://Scenes/Environment.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Props.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/WindController.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/Background.cs" type="Script" id=5]
-[ext_resource path="res://Assets/sprites/spr_deco_sheep_01_strip4.png" type="Texture" id=6]
-[ext_resource path="res://Assets/sprites/spr_deco_duck_01_strip4.png" type="Texture" id=7]
-[ext_resource path="res://Assets/sprites/spr_deco_cow_strip4.png" type="Texture" id=8]
-[ext_resource path="res://Assets/sprites/spr_deco_bird_01_strip4.png" type="Texture" id=9]
-[ext_resource path="res://Assets/sprites/spr_deco_pig_01_strip4.png" type="Texture" id=10]
-[ext_resource path="res://Assets/sprites/spr_deco_chicken_01_strip4.png" type="Texture" id=11]
-
-[sub_resource type="TileSet" id=57]
-0/name = "Tilemap.png 0"
-0/texture = ExtResource( 3 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 1600, 672, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 0, 32, 32, 0, 32, 32, 0, 32 )
@@ -695,31 +672,6 @@ resource_local_to_scene = true
 26/shapes = [  ]
 26/z_index = 0
 
-[sub_resource type="CSharpScript" id=56]
-resource_name = "Town"
-script/source = "using Godot;
-using System;
-
-public class Town : TileMap
-{
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = \"text\";
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
-}
-"
-
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
 region = Rect2( 8, 16, 32, 32 )
@@ -897,153 +849,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=58]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 9 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 9 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=61]
-atlas = ExtResource( 9 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 11 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 11 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 8 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 8 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=69]
-atlas = ExtResource( 8 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=70]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=71]
-atlas = ExtResource( 7 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=72]
-atlas = ExtResource( 7 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=73]
-atlas = ExtResource( 7 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=74]
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=75]
-atlas = ExtResource( 10 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=76]
-atlas = ExtResource( 10 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 10 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=78]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=79]
-atlas = ExtResource( 6 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=80]
-atlas = ExtResource( 6 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=81]
-atlas = ExtResource( 6 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=82]
-animations = [ {
-"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
-"loop": true,
-"name": "bird",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ],
-"loop": true,
-"name": "chicken",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
-"loop": true,
-"name": "cow",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ) ],
-"loop": true,
-"name": "pig",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ) ],
-"loop": true,
-"name": "sheep",
-"speed": 5.0
-} ]
-
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
-<<<<<<< Updated upstream
-=======
 
 [node name="WindController" type="Node" parent="."]
 script = ExtResource( 8 )
 
 [node name="DayNightCycle" type="CanvasModulate" parent="."]
->>>>>>> Stashed changes
 script = ExtResource( 4 )
-
-[node name="Background" type="TileMap" parent="."]
-position = Vector2( -33, 2 )
-tile_set = SubResource( 57 )
-cell_size = Vector2( 32, 32 )
-format = 1
-script = ExtResource( 5 )
 
 [node name="Town" type="TileMap" parent="."]
 position = Vector2( -193, -62 )
@@ -1052,8 +865,7 @@ cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 1.36422e-12, 1.36422e-12, 32, 1.36422e-12, 1.36422e-12 )
 show_collision = true
 format = 1
-tile_data = PoolIntArray( 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 26, 0, 131081, 26, 0, 131082, 26, 0, 131083, 26, 0, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 196613, 26, 0, 196614, 26, 0, 196615, 26, 0, 196616, 26, 0, 196617, 26, 0, 196618, 26, 0, 196619, 26, 0, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 262149, 26, 0, 262150, 26, 0, 262151, 26, 0, 262152, 25, 0, 262153, 25, 1, 262154, 25, 1, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 524293, 26, 0, 524294, 26, 0, 524295, 26, 0, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0 )
-script = SubResource( 56 )
+tile_data = PoolIntArray( 65540, 26, 0, 65541, 26, 0, 65542, 26, 0, 65543, 26, 0, 65544, 26, 0, 65545, 26, 0, 65546, 26, 0, 65547, 26, 0, 65548, 26, 0, 65549, 26, 0, 65550, 26, 0, 65551, 26, 0, 131076, 26, 0, 131077, 25, 1, 131078, 25, 1, 131079, 25, 1, 131080, 26, 0, 131081, 26, 0, 131082, 26, 0, 131083, 26, 0, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 131087, 26, 0, 196612, 26, 0, 196613, 25, 65537, 196614, 25, 65537, 196615, 25, 65537, 196616, 26, 0, 196617, 26, 0, 196618, 26, 0, 196619, 26, 0, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 196623, 26, 0, 262148, 26, 0, 262149, 25, 131073, 262150, 25, 131073, 262151, 25, 131073, 262152, 25, 0, 262153, 25, 1, 262154, 25, 1, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 262159, 26, 0, 327684, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 327695, 26, 0, 393220, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 393231, 26, 0, 458756, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 458767, 26, 0, 524292, 26, 0, 524293, 25, 1, 524294, 25, 1, 524295, 25, 1, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0, 524303, 26, 0, 589828, 26, 0, 589829, 25, 131073, 589830, 25, 131073, 589831, 25, 131073, 589832, 26, 0, 589833, 26, 0, 589834, 26, 0, 589835, 26, 0, 589836, 26, 0, 589837, 26, 0, 589838, 26, 0, 589839, 26, 0 )
 
 [node name="Decorations" type="TileMap" parent="."]
 position = Vector2( -193, -62 )
@@ -1094,8 +906,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 15 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
-<<<<<<< Updated upstream
-=======
+
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 position = Vector2( 0, 4 )
@@ -1132,12 +943,3 @@ attenuation = 2.0
 
 [node name="WeatherSounds" type="AudioStreamPlayer" parent="AudioManager"]
 volume_db = -10.0
->>>>>>> Stashed changes
-
-[node name="Node" type="Node" parent="."]
-
-[node name="Animal" type="AnimatedSprite" parent="Node"]
-position = Vector2( -88, 32 )
-frames = SubResource( 82 )
-animation = "duck"
-playing = true
