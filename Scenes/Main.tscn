@@ -1,21 +1,13 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=58 format=2]
-=======
 [gd_scene load_steps=62 format=2]
->>>>>>> Stashed changes
 
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilemap/Tilemap.png" type="Texture" id=3]
-<<<<<<< Updated upstream
-[ext_resource path="res://Scripts/Main.cs" type="Script" id=4]
-=======
 [ext_resource path="res://Scripts/DayNightCycle.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Environment.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Props.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/WindController.gd" type="Script" id=8]
->>>>>>> Stashed changes
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 0, 32, 32, 0, 32, 32, 0, 32 )
@@ -858,14 +850,11 @@ animations = [ {
 
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
-<<<<<<< Updated upstream
-=======
 
 [node name="WindController" type="Node" parent="."]
 script = ExtResource( 8 )
 
 [node name="DayNightCycle" type="CanvasModulate" parent="."]
->>>>>>> Stashed changes
 script = ExtResource( 4 )
 
 [node name="Town" type="TileMap" parent="."]
@@ -916,8 +905,6 @@ script = ExtResource( 1 )
 position = Vector2( 0, 15 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
-<<<<<<< Updated upstream
-=======
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 position = Vector2( 0, 4 )
@@ -954,4 +941,3 @@ attenuation = 2.0
 
 [node name="WeatherSounds" type="AudioStreamPlayer" parent="AudioManager"]
 volume_db = -10.0
->>>>>>> Stashed changes

@@ -1,53 +1,58 @@
 extends CanvasLayer
 
-var time = 0
-var weather_types = ["Sunny", "Cloudy", "Rainy", "Stormy"]
-var current_weather = "Sunny"
-var weather_timer = 0
-var weather_duration = 120  # Weather changes every 2 minutes
-var particles
+@onready var time_label: Label = $MarginContainer/HBoxContainer/TimeLabel
+@onready var stamina_bar: ProgressBar = $MarginContainer/HBoxContainer/Stamina
 
-onready var time_label = $TimeLabel
-onready var stamina_bar = $StaminaBar
+var time: float = 0.0
+var weather_types: Array[String] = ["Sunny", "Cloudy", "Rainy", "Stormy"]
+var current_weather: String = "Sunny"
+var weather_timer: float = 0.0
+var weather_duration: float = 120.0  # Weather changes every 2 minutes
+var particles: GPUParticles2D
 
-func _ready():
-	particles = CPUParticles2D.new()
+func _ready() -> void:
+	particles = GPUParticles2D.new()
 	particles.emitting = false
-	particles.amount = 100
+	particles.amount_ratio = 1
 	particles.lifetime = 2.0
-	particles.emission_shape = CPUParticles2D.EMISSION_SHAPE_BOX
-	particles.emission_box_extents = Vector2(500, 1)
-	particles.direction = Vector2(0, 1)
-	particles.gravity = Vector2(0, 98)
-	particles.initial_velocity = 50
+	
+	var material = ParticleProcessMaterial.new()
+	material.emission_shape = ParticleProcessMaterial.EmissionShape.BOX
+	material.emission_box_extents = Vector3(500, 1, 0)
+	material.direction = Vector3(0, 1, 0)
+	material.gravity = Vector3(0, 98, 0)
+	material.initial_velocity_min = 50.0
+	material.initial_velocity_max = 50.0
+	particles.process_material = material
+	
 	add_child(particles)
-	particles.position = Vector2(get_viewport().size.x/2, -10)
+	particles.position = Vector2(get_viewport().get_visible_rect().size.x/2, -10)
 	
 	$MarginContainer/HBoxContainer/TimeLabel.text = "12:00"
 	$MarginContainer/HBoxContainer/WeatherPanel/WeatherLabel.text = current_weather
-	$MarginContainer/HBoxContainer/Stamina.value = 100
-	$MarginContainer/HBoxContainer/Energy.value = 100
+	$MarginContainer/HBoxContainer/Stamina.value = 100.0
+	$MarginContainer/HBoxContainer/Energy.value = 100.0
 	
 	# Start weather cycle
 	_on_weather_timeout()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Update time label
-	var hours = int(fmod(time / 25, 24))  # 1 real second = 1 game minute
-	var minutes = int(fmod(time, 25) * 60 / 25)
-	$MarginContainer/HBoxContainer/TimeLabel.text = "%02d:%02d" % [hours, minutes]
+	var hours: int = int(fmod(time / 25.0, 24))  # 1 real second = 1 game minute
+	var minutes: int = int(fmod(time, 25.0) * 60.0 / 25.0)
+	time_label.text = "%02d:%02d" % [hours, minutes]
 	
 	# Update stamina from character
-	var player = get_parent().get_node("Character")
+	var player = get_parent().get_node("Character") as Node
 	if player:
-		stamina_bar.value = player.stamina
+		stamina_bar.value = player.get("stamina")
 	
 	# Handle weather changes
 	weather_timer += delta
 	if weather_timer >= weather_duration:
-		weather_timer = 0
+		weather_timer = 0.0
 		_on_weather_timeout()
 	
 	# Handle particles based on weather
@@ -55,45 +60,52 @@ func _process(delta):
 		"Rainy":
 			if !particles.emitting:
 				particles.modulate = Color(0.5, 0.5, 1.0, 0.5)
+				var material = particles.process_material as ParticleProcessMaterial
+				if material:
+					material.initial_velocity_min = 50.0
+					material.initial_velocity_max = 50.0
 				particles.emitting = true
 		"Stormy":
 			if !particles.emitting:
 				particles.modulate = Color(0.3, 0.3, 0.5, 0.7)
-				particles.initial_velocity = 100
+				var material = particles.process_material as ParticleProcessMaterial
+				if material:
+					material.initial_velocity_min = 100.0
+					material.initial_velocity_max = 100.0
 				particles.emitting = true
 		_:
 			particles.emitting = false
 	
 	# Update energy based on current time and weather
-	var energy = 100
-	var cycle = fmod(time / 25, 24)
+	var energy: float = 100.0
+	var cycle: float = fmod(time / 25.0, 24.0)
 	
 	# Reduce energy at night
-	if cycle < 6 || cycle > 20:  # Between 8 PM and 6 AM
-		energy -= 30
+	if cycle < 6.0 or cycle > 20.0:  # Between 8 PM and 6 AM
+		energy -= 30.0
 	
 	# Reduce energy based on weather
 	match current_weather:
 		"Cloudy":
-			energy -= 10
+			energy -= 10.0
 		"Rainy":
-			energy -= 20
+			energy -= 20.0
 		"Stormy":
-			energy -= 30
+			energy -= 30.0
 	
 	$MarginContainer/HBoxContainer/Energy.value = energy
 
-func _on_weather_timeout():
+func _on_weather_timeout() -> void:
 	current_weather = weather_types[randi() % weather_types.size()]
 	$MarginContainer/HBoxContainer/WeatherPanel/WeatherLabel.text = current_weather
 	
 	# Update energy based on weather
 	match current_weather:
 		"Sunny":
-			$MarginContainer/HBoxContainer/Energy.value = 100
+			$MarginContainer/HBoxContainer/Energy.value = 100.0
 		"Cloudy":
-			$MarginContainer/HBoxContainer/Energy.value = 75
+			$MarginContainer/HBoxContainer/Energy.value = 75.0
 		"Rainy":
-			$MarginContainer/HBoxContainer/Energy.value = 50
+			$MarginContainer/HBoxContainer/Energy.value = 50.0
 		"Stormy":
-			$MarginContainer/HBoxContainer/Energy.value = 25
+			$MarginContainer/HBoxContainer/Energy.value = 25.0

@@ -1,12 +1,16 @@
 using Godot;
 using System;
 
-public partial class Character : AnimatedSprite
+public partial class Character : AnimatedSprite2D
 {
 	[Export]
 	public int GridSize = 16;
 	[Export]
 	public float Speed = 200.0f;
+
+	public float stamina = 100.0f;
+	private float staminaRegenRate = 10.0f;
+	private float staminaUseRate = 20.0f;
 
 	private bool isMoving = false;
 	private Vector2 targetPosition = Vector2.Zero;
@@ -52,12 +56,21 @@ public partial class Character : AnimatedSprite
 		}
 	}
 
-	public override void _Process(float delta)
+	public override void _Process(double delta)
 	{
+		// Regenerate stamina when not moving
+		if (!isMoving)
+		{
+			stamina = Mathf.Min(stamina + (staminaRegenRate * (float)delta), 100.0f);
+		}
+
 		if (isMoving)
 		{
 			Vector2 moveDirection = (targetPosition - Position).Normalized();
-			Position += moveDirection * Speed * delta;
+			Position += moveDirection * Speed * (float)delta;
+
+			// Use stamina while moving
+			stamina = Mathf.Max(stamina - (staminaUseRate * (float)delta), 0.0f);
 
 			if (Position.DistanceTo(targetPosition) < 1)
 			{
@@ -69,28 +82,31 @@ public partial class Character : AnimatedSprite
 		else
 		{
 			Vector2 direction = Vector2.Zero;
-
-			if (Input.IsActionPressed("ui_right"))
+			// Only allow movement if we have stamina
+			if (stamina > 0)
 			{
-				direction.x += 1;
-				FlipH = false;
-				lastDirection = "side";
-			}
-			else if (Input.IsActionPressed("ui_left"))
-			{
-				direction.x -= 1;
-				FlipH = true;
-				lastDirection = "side";
-			}
-			else if (Input.IsActionPressed("ui_up"))
-			{
-				direction.y -= 1;
-				lastDirection = "up";
-			}
-			else if (Input.IsActionPressed("ui_down"))
-			{
-				direction.y += 1;
-				lastDirection = "down";
+				if (Input.IsActionPressed("ui_right"))
+				{
+					direction.X += 1;
+					FlipH = false;
+					lastDirection = "side";
+				}
+				else if (Input.IsActionPressed("ui_left"))
+				{
+					direction.X -= 1;
+					FlipH = true;
+					lastDirection = "side";
+				}
+				else if (Input.IsActionPressed("ui_up"))
+				{
+					direction.Y -= 1;
+					lastDirection = "up";
+				}
+				else if (Input.IsActionPressed("ui_down"))
+				{
+					direction.Y += 1;
+					lastDirection = "down";
+				}
 			}
 
 			if (direction != Vector2.Zero)
