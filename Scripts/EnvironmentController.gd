@@ -9,10 +9,10 @@ var wind_influence = Vector2.ZERO
 
 func _ready():
 	# Start with default states
-	fireflies.emitting = false
-	butterflies.emitting = true
-	water_reflections.emitting = true
-	leaf_particles.emitting = false
+# 	fireflies.emitting = false
+# 	butterflies.emitting = true
+# 	water_reflections.emitting = true
+# 	leaf_particles.emitting = false
 	
 	# Connect to wind controller
 	var wind_controller = get_node("/root/Main/WindController")
@@ -30,29 +30,29 @@ func _process(_delta):
 		var weather = hud.current_weather
 		
 		# Handle fireflies with pulsing glow and wind influence
-		fireflies.emitting = is_night && (weather == "Sunny" || weather == "Cloudy")
-		if fireflies.emitting:
-			var pulse = (sin(time * 2) + 1) * 0.5
-			fireflies.scale_amount = 2 + pulse
-			fireflies.color.a = 0.7 + pulse * 0.3
-			fireflies.direction = wind_influence
+# 		fireflies.emitting = is_night && (weather == "Sunny" || weather == "Cloudy")
+# 		if fireflies.emitting:
+# 			var pulse = (sin(time * 2) + 1) * 0.5
+# 			fireflies.scale_amount = 2 + pulse
+# 			fireflies.color.a = 0.7 + pulse * 0.3
+# 			fireflies.direction = wind_influence
 		
 		# Make butterflies react to wind
-		butterflies.emitting = !is_night && (weather == "Sunny" || weather == "Cloudy")
-		if butterflies.emitting:
-			butterflies.direction = wind_influence
-			butterflies.initial_velocity = 30 + wind_influence.length() * 20
+# 		butterflies.emitting = !is_night && (weather == "Sunny" || weather == "Cloudy")
+# 		if butterflies.emitting:
+# 			butterflies.direction = wind_influence
+# 			butterflies.initial_velocity = 30 + wind_influence.length() * 20
 		
 		# Enhance leaf particles with wind
-		leaf_particles.emitting = weather == "Stormy" || wind_influence.length() > 0.3
-		if leaf_particles.emitting:
-			leaf_particles.direction = wind_influence
-			leaf_particles.initial_velocity = 40 + wind_influence.length() * 50
+# 		leaf_particles.emitting = weather == "Stormy" || wind_influence.length() > 0.3
+# 		if leaf_particles.emitting:
+# 			leaf_particles.direction = wind_influence
+# 			leaf_particles.initial_velocity = 40 + wind_influence.length() * 50
 		
 		# Make water reflections respond to wind
-		water_reflections.amount = 50 if weather == "Sunny" else 30
-		water_reflections.initial_velocity = 5 + wind_influence.length() * 10
-		water_reflections.direction = wind_influence
+# 		water_reflections.amount = 50 if weather == "Sunny" else 30
+# 		water_reflections.initial_velocity = 5 + wind_influence.length() * 10
+# 		water_reflections.direction = wind_influence
 
 func _on_wind_changed(strength, direction):
 	wind_influence = direction * strength

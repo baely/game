@@ -15,8 +15,8 @@ func _ready():
 	particles.emitting = false
 	particles.amount = 100
 	particles.lifetime = 2.0
-	particles.emission_shape = CPUParticles2D.EMISSION_SHAPE_BOX
-	particles.emission_box_extents = Vector2(500, 1)
+# 	particles.emission_shape = CPUParticles2D.EMISSION_SHAPE_BOX
+# 	particles.emission_box_extents = Vector2(500, 1)
 	particles.direction = Vector2(0, 1)
 	particles.gravity = Vector2(0, 98)
 	particles.initial_velocity = 50
@@ -41,8 +41,8 @@ func _process(delta):
 	
 	# Update stamina from character
 	var player = get_parent().get_node("Character")
-	if player:
-		stamina_bar.value = player.stamina
+# 	if player:
+# 		stamina_bar.value = player.stamina
 	
 	# Handle weather changes
 	weather_timer += delta

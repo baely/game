@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilemap/Tilemap.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Main.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/DayNightCycle.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Environment.tscn" type="PackedScene" id=6]
@@ -906,7 +905,6 @@ script = ExtResource( 1 )
 position = Vector2( 0, 15 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
-
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 position = Vector2( 0, 4 )
