@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="WebGame"
+config/name="game"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
@@ -27,7 +27,7 @@ default_clear_color=Color( 0.14, 0.14, 0.14, 1 )
 
 [mono]
 
-project/assembly_name="WebGame"
+project/assembly_name="game"
 
 [physics]
 

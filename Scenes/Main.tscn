@@ -1,8 +1,9 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
-[ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilemap/Tilemap.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Main.cs" type="Script" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 0, 32, 32, 0, 32, 32, 0, 32 )
@@ -667,182 +668,146 @@ resource_local_to_scene = true
 26/z_index = 0
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 16, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=27]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=29]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=31]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 112, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=32]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=36]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=37]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=38]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=39]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=40]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=41]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=42]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=43]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 160, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=46]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=47]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=48]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=49]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 256, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=50]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 8, 208, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=51]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 56, 208, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=52]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 104, 208, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 152, 208, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=54]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 200, 208, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=55]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 248, 208, 32, 32 )
 
@@ -881,6 +846,7 @@ animations = [ {
 
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
+script = ExtResource( 4 )
 
 [node name="Town" type="TileMap" parent="."]
 position = Vector2( -193, -62 )
@@ -894,7 +860,7 @@ tile_data = PoolIntArray( 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 2
 [node name="Character" type="AnimatedSprite" parent="."]
 position = Vector2( 127, 98 )
 frames = SubResource( 25 )
-animation = "walk_back"
+animation = "idle"
 playing = true
 script = ExtResource( 1 )
 
