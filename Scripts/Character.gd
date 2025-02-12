@@ -5,23 +5,15 @@ var is_moving = false
 var target_position = Vector2.ZERO
 var speed = 50
 var last_direction = "down"  # Track last direction for idle state
-<<<<<<< Updated upstream
-=======
 var particles
 var footstep_player: AudioStreamPlayer2D
 var sprite: AnimatedSprite
 var wind_influence = Vector2.ZERO
 var wind_resistance = 0.0
->>>>>>> Stashed changes
 
 func _ready():
 	position = position.snapped(Vector2.ONE * grid_size)
 	target_position = position
-<<<<<<< Updated upstream
-	play("idle")  # Default idle front
-
-func update_animation(direction: String, is_walking: bool):
-=======
 	sprite = $AnimatedSprite
 	sprite.play("idle")  # Default idle front
 	
@@ -66,7 +58,6 @@ func update_animation(direction: String, is_walking: bool):
 	
 	particles.position = particle_offset
 	
->>>>>>> Stashed changes
 	var animation_prefix = "walk" if is_walking else "idle"
 	
 	match direction:
@@ -83,12 +74,6 @@ func update_animation(direction: String, is_walking: bool):
 	
 	last_direction = direction
 
-<<<<<<< Updated upstream
-func _process(delta):
-	if is_moving:
-		var move_direction = (target_position - position).normalized()
-		position += move_direction * speed * delta
-=======
 func play_footstep():
 	if !footstep_player.playing:
 		# Adjust footstep sound based on wind strength
@@ -112,15 +97,12 @@ func _process(delta):
 		var wind_effect = wind_influence * wind_resistance
 		var final_direction = (move_direction + wind_effect).normalized()
 		var collision = move_and_collide(final_direction * speed * delta)
->>>>>>> Stashed changes
 		
 		if position.distance_to(target_position) < 1:
 			position = target_position
 			is_moving = false
 			# When stopping, play idle animation for last direction
 			update_animation(last_direction, false)
-<<<<<<< Updated upstream
-=======
 		else:
 			# Continue normal movement
 			if position.distance_to(target_position) < 1:
@@ -134,7 +116,6 @@ func _process(delta):
 		
 		if int(floor(OS.get_ticks_msec() / step_interval)) % 2 == 0:
 			play_footstep()
->>>>>>> Stashed changes
 	else:
 		var direction = Vector2.ZERO
 		var dir_string = last_direction
