@@ -14,20 +14,20 @@ func _process(delta):
 	var hud = get_node("/root/Main/HUD")
 	
 	if hud:
-		var weather = hud.current_weather
+# 		var weather = hud.current_weather
 		
 		# Update wind based on weather
-		match weather:
-			"Sunny":
-				wind_strength = lerp(wind_strength, 0.1, 0.1)
-			"Cloudy":
-				wind_strength = lerp(wind_strength, 0.3, 0.1)
-			"Rainy":
-				wind_strength = lerp(wind_strength, 0.5, 0.1)
-			"Stormy":
-				wind_strength = lerp(wind_strength, 1.0, 0.1)
-				# Add wind gusts during storms
-				wind_strength += sin(time * 3) * 0.2
+# 		match weather:
+# 			"Sunny":
+# 				wind_strength = lerp(wind_strength, 0.1, 0.1)
+# 			"Cloudy":
+# 				wind_strength = lerp(wind_strength, 0.3, 0.1)
+# 			"Rainy":
+# 				wind_strength = lerp(wind_strength, 0.5, 0.1)
+# 			"Stormy":
+# 				wind_strength = lerp(wind_strength, 1.0, 0.1)
+# 				Add wind gusts during storms
+# 				wind_strength += sin(time * 3) * 0.2
 		
 		# Gradually change wind direction
 		var target_direction = Vector2.RIGHT.rotated(sin(time * 0.2) * PI)

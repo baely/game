@@ -27,7 +27,7 @@ func _process(_delta):
 	if hud && day_night:
 		var time_cycle = day_night.time
 		var is_night = time_cycle > 0.75 || time_cycle < 0.25
-		var weather = hud.current_weather
+# 		var weather = hud.current_weather
 		
 		# Handle fireflies with pulsing glow and wind influence
 # 		fireflies.emitting = is_night && (weather == "Sunny" || weather == "Cloudy")
