@@ -1,9 +1,12 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/sprites/characters/player.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tilemap/Tilemap.png" type="Texture" id=3]
+[ext_resource path="res://Assets/sprites/FOOD.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/DrinkCan.cs" type="Script" id=6]
+[ext_resource path="res://Scripts/SpeedBoostUI.cs" type="Script" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 0, 32, 32, 0, 32, 32, 0, 32 )
@@ -667,6 +670,39 @@ resource_local_to_scene = true
 26/shapes = [  ]
 26/z_index = 0
 
+[sub_resource type="TileSet" id=56]
+0/name = "FOOD.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 105, 137, 13, 18 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "FOOD.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 128, 128, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=57]
+extents = Vector2( 5, 7 )
+
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
 region = Rect2( 8, 16, 32, 32 )
@@ -844,6 +880,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 6.5, 9.5 )
+
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
 
@@ -856,20 +895,67 @@ show_collision = true
 format = 1
 tile_data = PoolIntArray( 65540, 26, 0, 65541, 26, 0, 65542, 26, 0, 65543, 26, 0, 65544, 26, 0, 65545, 26, 0, 65546, 26, 0, 65547, 26, 0, 65548, 26, 0, 65549, 26, 0, 65550, 26, 0, 65551, 26, 0, 131076, 26, 0, 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 26, 0, 131081, 26, 0, 131082, 26, 0, 131083, 26, 0, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 131087, 26, 0, 196612, 26, 0, 196613, 26, 0, 196614, 26, 0, 196615, 26, 0, 196616, 26, 0, 196617, 26, 0, 196618, 26, 0, 196619, 26, 0, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 196623, 26, 0, 262148, 26, 0, 262149, 26, 0, 262150, 26, 0, 262151, 26, 0, 262152, 25, 0, 262153, 25, 1, 262154, 25, 1, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 262159, 26, 0, 327684, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 327695, 26, 0, 393220, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 393231, 26, 0, 458756, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 458767, 26, 0, 524292, 26, 0, 524293, 26, 0, 524294, 26, 0, 524295, 26, 0, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0, 524303, 26, 0, 589828, 26, 0, 589829, 26, 0, 589830, 26, 0, 589831, 26, 0, 589832, 26, 0, 589833, 26, 0, 589834, 26, 0, 589835, 26, 0, 589836, 26, 0, 589837, 26, 0, 589838, 26, 0, 589839, 26, 0 )
 
-[node name="Character" type="AnimatedSprite" parent="."]
-position = Vector2( 127, 98 )
-frames = SubResource( 25 )
-animation = "idle"
-playing = true
-script = ExtResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="Character"]
-position = Vector2( 0, 15 )
-current = true
-zoom = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
-position = Vector2( 0, 4 )
-shape = SubResource( 6 )
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 10, 0 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = SubResource( 56 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 64, 1.36422e-12, 1.36422e-12, 64, 1.36422e-12, 1.36422e-12 )
+cell_tile_origin = 1
+format = 1
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="DrinkCan" type="Area2D" parent="."]
+position = Vector2( 95, 146 )
+script = ExtResource( 6 )
+SpeedBoostMultiplier = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkCan"]
+shape = SubResource( 57 )
+
+[node name="Sprite" type="Sprite" parent="DrinkCan"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 104, 133, 15, 24 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 127, 97 )
+script = ExtResource( 1 )
+Speed = 48.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 0, -3 )
+current = true
+zoom = Vector2( 0.25, 0.25 )
+smoothing_enabled = true
+smoothing_speed = 7.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+position = Vector2( 0, -5 )
+frames = SubResource( 25 )
+animation = "idle"
+speed_scale = 2.0
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( 0.5, -5.5 )
+shape = SubResource( 58 )
+
+[node name="SpeedBoostUI" type="CanvasLayer" parent="."]
+script = ExtResource( 7 )
+
+[node name="ProgressBar" type="ProgressBar" parent="SpeedBoostUI"]
+margin_left = 93.0
+margin_top = 633.0
+margin_right = 1162.0
+margin_bottom = 681.0
+percent_visible = false
+
+[node name="Label" type="Label" parent="SpeedBoostUI/ProgressBar"]
+margin_left = 513.0
+margin_top = 18.0
+margin_right = 553.0
+margin_bottom = 32.0
