@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 /// <summary>
-/// Represents a player character that can move on a grid-based system
+/// Represents a player character that can move on a grid-based system using MoveAndCollide
 /// </summary>
 public partial class Character : KinematicBody2D
 {
@@ -19,6 +19,7 @@ public partial class Character : KinematicBody2D
 
 	private bool isMoving = false;
 	private Vector2 targetPosition = Vector2.Zero;
+	private Vector2 velocity = Vector2.Zero;
 	private string lastDirection = DIRECTION_DOWN;
 	private float originalSpeed;
 	private float speedMultiplier = 1.0f;
@@ -54,7 +55,10 @@ public partial class Character : KinematicBody2D
 	public override void _Process(float delta)
 	{
 		ProcessSpeedBoost(delta);
-		
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
 		if (isMoving)
 		{
 			ProcessMovement(delta);
@@ -71,6 +75,11 @@ public partial class Character : KinematicBody2D
 		{
 			speedBoostTimeLeft -= delta;
 			speedBoostUI.UpdateBoostTimer(speedBoostTimeLeft);
+			if (speedBoostTimeLeft <= 1)
+			{
+				Speed = originalSpeed * ((speedMultiplier - 1) * speedBoostTimeLeft + 1);
+				sprite.SpeedScale = (speedMultiplier - 1) * speedBoostTimeLeft + 1;
+			}
 			if (speedBoostTimeLeft <= 0)
 			{
 				ResetSpeedBoost();
@@ -88,9 +97,18 @@ public partial class Character : KinematicBody2D
 	private void ProcessMovement(float delta)
 	{
 		Vector2 moveDirection = (targetPosition - Position).Normalized();
-		Position += moveDirection * Speed * delta;
+		velocity = moveDirection * Speed;
 		
-		if (Position.DistanceTo(targetPosition) < POSITION_THRESHOLD)
+		KinematicCollision2D collision = MoveAndCollide(velocity * delta);
+		
+		if (collision != null)
+		{
+			// Handle collision - stop movement and reset target position
+			targetPosition = Position;
+			isMoving = false;
+			PlayIdleAnimation();
+		}
+		else if (Position.DistanceTo(targetPosition) < POSITION_THRESHOLD)
 		{
 			Position = targetPosition;
 			isMoving = false;
@@ -104,9 +122,16 @@ public partial class Character : KinematicBody2D
 		
 		if (direction != Vector2.Zero)
 		{
-			targetPosition = Position + (direction * GridSize);
-			isMoving = true;
-			PlayWalkAnimation();
+			// Check if the next position is valid before moving
+			Vector2 nextPosition = Position + (direction * GridSize);
+			var testMove = TestMove(GlobalTransform, direction * GridSize);
+			
+			if (!testMove)
+			{
+				targetPosition = nextPosition;
+				isMoving = true;
+				PlayWalkAnimation();
+			}
 		}
 	}
 
@@ -150,10 +175,7 @@ public partial class Character : KinematicBody2D
 			_ => "idle"
 		};
 
-		if (sprite.Animation != nextAnimation)
-		{
-			sprite.Animation = nextAnimation;
-		}
+		sprite.Animation = nextAnimation;
 	}
 
 	private void PlayWalkAnimation()

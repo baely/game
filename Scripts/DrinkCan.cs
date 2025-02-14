@@ -10,7 +10,6 @@ public partial class DrinkCan : Area2D
 
 	public override void _Ready()
 	{
-		// Connect the body_entered signal using Godot 3.x syntax
 		Connect("body_entered", this, nameof(OnBodyEntered));
 	}
 

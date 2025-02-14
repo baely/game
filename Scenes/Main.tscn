@@ -669,6 +669,51 @@ resource_local_to_scene = true
 26/shape_one_way_margin = 0.0
 26/shapes = [  ]
 26/z_index = 0
+27/name = "Tilemap.png 27"
+27/texture = ExtResource( 3 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 928, 224, 64, 64 )
+27/tile_mode = 2
+27/autotile/icon_coordinate = Vector2( 0, 0 )
+27/autotile/tile_size = Vector2( 32, 32 )
+27/autotile/spacing = 0
+27/autotile/occluder_map = [  ]
+27/autotile/navpoly_map = [  ]
+27/autotile/priority_map = [  ]
+27/autotile/z_index_map = [  ]
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
+28/name = "Tilemap.png 28"
+28/texture = ExtResource( 3 )
+28/tex_offset = Vector2( 0, 0 )
+28/modulate = Color( 1, 1, 1, 1 )
+28/region = Rect2( 928, 224, 64, 64 )
+28/tile_mode = 1
+28/autotile/bitmask_mode = 0
+28/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 4, Vector2( 1, 0 ), 64, Vector2( 1, 1 ), 1 ]
+28/autotile/icon_coordinate = Vector2( 0, 0 )
+28/autotile/tile_size = Vector2( 32, 32 )
+28/autotile/spacing = 0
+28/autotile/occluder_map = [  ]
+28/autotile/navpoly_map = [  ]
+28/autotile/priority_map = [  ]
+28/autotile/z_index_map = [  ]
+28/autotile/fallback_mode = 0
+28/occluder_offset = Vector2( 0, 0 )
+28/navigation_offset = Vector2( 0, 0 )
+28/shape_offset = Vector2( 0, 0 )
+28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape_one_way = false
+28/shape_one_way_margin = 0.0
+28/shapes = [  ]
+28/z_index = 0
 
 [sub_resource type="TileSet" id=56]
 0/name = "FOOD.png 0"
@@ -881,7 +926,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=58]
-extents = Vector2( 6.5, 9.5 )
+extents = Vector2( 7.75, 6.25 )
 
 [node name="Main" type="Node2D"]
 position = Vector2( -127, -98 )
@@ -893,7 +938,7 @@ cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 1.36422e-12, 1.36422e-12, 32, 1.36422e-12, 1.36422e-12 )
 show_collision = true
 format = 1
-tile_data = PoolIntArray( 65540, 26, 0, 65541, 26, 0, 65542, 26, 0, 65543, 26, 0, 65544, 26, 0, 65545, 26, 0, 65546, 26, 0, 65547, 26, 0, 65548, 26, 0, 65549, 26, 0, 65550, 26, 0, 65551, 26, 0, 131076, 26, 0, 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 26, 0, 131081, 26, 0, 131082, 26, 0, 131083, 26, 0, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 131087, 26, 0, 196612, 26, 0, 196613, 26, 0, 196614, 26, 0, 196615, 26, 0, 196616, 26, 0, 196617, 26, 0, 196618, 26, 0, 196619, 26, 0, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 196623, 26, 0, 262148, 26, 0, 262149, 26, 0, 262150, 26, 0, 262151, 26, 0, 262152, 25, 0, 262153, 25, 1, 262154, 25, 1, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 262159, 26, 0, 327684, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 327695, 26, 0, 393220, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 393231, 26, 0, 458756, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 458767, 26, 0, 524292, 26, 0, 524293, 26, 0, 524294, 26, 0, 524295, 26, 0, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0, 524303, 26, 0, 589828, 26, 0, 589829, 26, 0, 589830, 26, 0, 589831, 26, 0, 589832, 26, 0, 589833, 26, 0, 589834, 26, 0, 589835, 26, 0, 589836, 26, 0, 589837, 26, 0, 589838, 26, 0, 589839, 26, 0 )
+tile_data = PoolIntArray( 65540, 26, 0, 65541, 26, 0, 65542, 26, 0, 65543, 26, 0, 65544, 26, 0, 65545, 16, 0, 65546, 16, 1, 65547, 16, 2, 65548, 26, 0, 65549, 26, 0, 65550, 26, 0, 65551, 26, 0, 131076, 26, 0, 131077, 26, 0, 131078, 26, 0, 131079, 26, 0, 131080, 26, 0, 131081, 16, 131072, 131082, 16, 131073, 131083, 16, 131074, 131084, 26, 0, 131085, 26, 0, 131086, 26, 0, 131087, 26, 0, 196612, 26, 0, 196613, 26, 0, 196614, 26, 0, 196615, 26, 0, 196616, 26, 0, 196617, 2, 65536, 196618, 16, 196609, 196619, 2, 131072, 196620, 26, 0, 196621, 26, 0, 196622, 26, 0, 196623, 26, 0, 262148, 26, 0, 262149, 26, 0, 262150, 26, 0, 262151, 26, 0, 262152, 25, 0, 262153, 25, 1, 262154, 3, 262145, 262155, 25, 2, 262156, 26, 0, 262157, 26, 0, 262158, 26, 0, 262159, 26, 0, 327684, 26, 0, 327685, 26, 0, 327686, 26, 0, 327687, 26, 0, 327688, 25, 65536, 327689, 25, 65537, 327690, 25, 65537, 327691, 25, 65538, 327692, 26, 0, 327693, 26, 0, 327694, 26, 0, 327695, 26, 0, 393220, 26, 0, 393221, 26, 0, 393222, 26, 0, 393223, 26, 0, 393224, 25, 131072, 393225, 25, 131073, 393226, 25, 131073, 393227, 25, 131074, 393228, 26, 0, 393229, 26, 0, 393230, 26, 0, 393231, 26, 0, 458756, 26, 0, 458757, 26, 0, 458758, 26, 0, 458759, 26, 0, 458760, 23, 6, 458761, 23, 6, 458762, 23, 6, 458763, 23, 6, 458764, 26, 0, 458765, 26, 0, 458766, 26, 0, 458767, 26, 0, 524292, 26, 0, 524293, 26, 0, 524294, 26, 0, 524295, 26, 0, 524296, 26, 0, 524297, 26, 0, 524298, 26, 0, 524299, 26, 0, 524300, 26, 0, 524301, 26, 0, 524302, 26, 0, 524303, 26, 0, 589828, 26, 0, 589829, 26, 0, 589830, 26, 0, 589831, 26, 0, 589832, 28, 0, 589833, 28, 1, 589834, 26, 0, 589835, 26, 0, 589836, 26, 0, 589837, 26, 0, 589838, 26, 0, 589839, 26, 0, 655368, 22, 65537, 655369, 22, 65537 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 10, 0 )
@@ -905,12 +950,12 @@ cell_tile_origin = 1
 format = 1
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="DrinkCan" type="Area2D" parent="."]
 position = Vector2( 95, 146 )
 script = ExtResource( 6 )
 SpeedBoostMultiplier = 4.0
+SpeedBoostDuration = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkCan"]
 shape = SubResource( 57 )
@@ -937,11 +982,11 @@ smoothing_speed = 7.0
 position = Vector2( 0, -5 )
 frames = SubResource( 25 )
 animation = "idle"
-speed_scale = 2.0
+speed_scale = 2.4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 0.5, -5.5 )
+position = Vector2( -0.25, 1.25 )
 shape = SubResource( 58 )
 
 [node name="SpeedBoostUI" type="CanvasLayer" parent="."]
