@@ -4,28 +4,22 @@
 [ext_resource path="res://Scripts/Character.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=58]
-extents = Vector2( 7.75, 6.25 )
+extents = Vector2( 7, 7 )
 
-[node name="Player" type="Node2D"]
-
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 127, 96 )
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-Speed = 48.0
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -5 )
 frames = ExtResource( 1 )
 animation = "idle"
 speed_scale = 2.4
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( -0.25, 1.25 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 58 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 0, -3 )
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.25, 0.25 )
 smoothing_enabled = true

@@ -7,25 +7,24 @@ public class NPC : KinematicBody2D
     private float textTimeLeft = 0.0f;
     private Control control;
 
-    public override void _Ready()
-    {
-        control = GetNode<Control>("Control");
-    }
+	public override void _Ready()
+	{
+		control = GetNode<Control>("Control");
+	}
 
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
 
-        if (textTimeLeft > 0)
-        {
-            textTimeLeft -= delta;
-            if (textTimeLeft <= 0)
-            {
-                control.Visible = false;
-            }
-        }
-    }
-
+		if (textTimeLeft > 0)
+		{
+			textTimeLeft -= delta;
+			if (textTimeLeft <= 0)
+			{
+				control.Visible = false;
+			}
+		}
+	}
     public void Bump()
     {
         if (textTimeLeft > 0)
