@@ -11,6 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      # Install Godot Headless
+      - name: Setup Godot
+        run: |
+          wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux_headless.64.zip
+          unzip Godot_v4.2.1-stable_linux_headless.64.zip
+          mv Godot_v4.2.1-stable_linux_headless.64 godot
+          chmod +x godot
+      
+      # Install Export Templates
+      - name: Setup Export Templates
+        run: |
+          wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable
+          unzip Godot_v4.2.1-stable_export_templates.tpz
+          mv templates/* ~/.local/share/godot/export_templates/4.2.1.stable/
+      
+      # Build Project
+      - name: Build Project
+        run: |
+          mkdir -p Build/web
+          ./godot --headless --export-release "Web" ./Build/web/index.html
+      
+      # Copy build files to public directory
+      - name: Copy build files to public
+        run: |
+          rm -rf public/*
+          cp -r Build/web/* public/
+      
+      # Deploy to Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
