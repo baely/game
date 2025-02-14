@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class NPC : KinematicBody2D
 {
     private float textTimeLeft = 0.0f;
-    private float coolDownTimeLeft = 0.0f;
     private Control control;
 
     public override void _Ready()
@@ -29,8 +28,6 @@ public class NPC : KinematicBody2D
 
     public void Bump()
     {
-        GD.Print("cooldown", coolDownTimeLeft);
-
         if (textTimeLeft > 0)
         {
             return;
@@ -166,12 +163,13 @@ public class NPC : KinematicBody2D
             "I was just about to become a treasure hunter!", "You made me drop my soup!", "I was just about to solve the mystery of the Sphinx!",
             "You made me forget my hopes!", "I was just about to become a myth buster!", "You made me lose my harmony!",
             "I was just about to invent a new instrument!", "You made me drop my cake!", "I was just about to become a monster hunter!", "OI" };
-		Random random = new Random();
-		string text = items[random.Next(items.Count)];
+        Random random = new Random();
+        // Access the stored player name
+        string playerName = Global.PlayerName;
+        string text = playerName + " " + items[random.Next(items.Count)];
         textTimeLeft = 3.0f;
-        
-		control.Visible = true;
-		control.GetNode<Label>("Label").Text = text;
-	}
-    
+
+        control.Visible = true;
+        control.GetNode<Label>("Label").Text = text;
+    }
 }
