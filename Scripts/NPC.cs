@@ -163,9 +163,13 @@ public class NPC : KinematicBody2D
             "You made me forget my hopes!", "I was just about to become a myth buster!", "You made me lose my harmony!",
             "I was just about to invent a new instrument!", "You made me drop my cake!", "I was just about to become a monster hunter!", "OI" };
         Random random = new Random();
+        string text = items[random.Next(items.Count)];
         // Access the stored player name
         string playerName = Global.PlayerName;
-        string text = playerName + " " + items[random.Next(items.Count)];
+        if (playerName.Length > 0)
+        {
+	        text = playerName + " " + text;
+        }
         textTimeLeft = 3.0f;
 
         control.Visible = true;

@@ -92,8 +92,8 @@ valign = 1
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_left = 814.0
 margin_top = 9.0
-margin_right = 1394.0
+margin_right = 1263.0
 margin_bottom = 49.0
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 0
 max_length = 10
