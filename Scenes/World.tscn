@@ -768,25 +768,25 @@ position = Vector2( 3, -73 )
 SpeedBoostMultiplier = 2.0
 SpeedBoostDuration = 5.0
 
-[node name="World" type="Node2D" parent="."]
+[node name="DN" type="Node2D" parent="."]
 position = Vector2( -127, -98 )
 
-[node name="GroundLayers" type="Node2D" parent="World"]
+[node name="GroundLayers" type="Node2D" parent="DN"]
 
-[node name="BaseGround" type="TileMap" parent="World/GroundLayers"]
+[node name="BaseGround" type="TileMap" parent="DN/GroundLayers"]
 format = 1
 
-[node name="Path" type="TileMap" parent="World/GroundLayers"]
+[node name="Path" type="TileMap" parent="DN/GroundLayers"]
 format = 1
 
-[node name="YSort" type="YSort" parent="World"]
+[node name="YSort" type="YSort" parent="DN"]
 
-[node name="Player" parent="World/YSort" instance=ExtResource( 5 )]
+[node name="Player" parent="DN/YSort" instance=ExtResource( 5 )]
 
-[node name="NPCs" type="Node2D" parent="World/YSort"]
+[node name="NPCs" type="Node2D" parent="DN/YSort"]
 
-[node name="NPC2" parent="World/YSort/NPCs" instance=ExtResource( 1 )]
+[node name="NPC2" parent="DN/YSort/NPCs" instance=ExtResource( 1 )]
 position = Vector2( 172, 136 )
 
-[node name="NPC" parent="World/YSort/NPCs" instance=ExtResource( 1 )]
+[node name="NPC" parent="DN/YSort/NPCs" instance=ExtResource( 1 )]
 position = Vector2( 87, 87 )
