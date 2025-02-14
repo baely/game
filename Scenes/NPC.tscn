@@ -4,35 +4,32 @@
 [ext_resource path="res://Scripts/NPC.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.5, 4.5 )
+extents = Vector2( 7, 7 )
 
-[node name="NPC" type="Node2D"]
-position = Vector2( -1, 0 )
-
-[node name="NPC" type="KinematicBody2D" parent="."]
+[node name="NPC" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -5 )
 frames = ExtResource( 1 )
 animation = "idle"
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-position = Vector2( 0.5, 4.5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Control" type="Control" parent="NPC"]
+[node name="Control" type="Control" parent="."]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Panel" type="Panel" parent="NPC/Control"]
+[node name="Panel" type="Panel" parent="Control"]
 margin_left = -20.0
 margin_top = -23.0
 margin_right = 20.0
 margin_bottom = -11.0
 
-[node name="Label" type="Label" parent="NPC/Control"]
+[node name="Label" type="Label" parent="Control"]
 anchor_left = -0.499
 anchor_top = -0.564
 anchor_right = 0.5
