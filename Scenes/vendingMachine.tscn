@@ -20,3 +20,5 @@ shape = SubResource( 57 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 390, 70, 20, 40 )
+
+[node name="Tween" type="Tween" parent="."]
