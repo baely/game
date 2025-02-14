@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Player.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/NPC.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.5, 4.5 )
+
+[node name="NPC" type="Node2D"]
+
+[node name="NPC" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
+frames = ExtResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
+position = Vector2( 0.5, 4.5 )
+shape = SubResource( 1 )
+
+[node name="Control" type="Control" parent="NPC"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="NPC/Control"]
+margin_left = -20.0
+margin_top = -23.0
+margin_right = 20.0
+margin_bottom = -11.0
+
+[node name="Label" type="Label" parent="NPC/Control"]
+anchor_left = -0.499
+anchor_top = -0.564
+anchor_right = 0.5
+anchor_bottom = -0.275
+margin_left = 6.96
+margin_top = 3.56
+margin_right = 72.0
+margin_bottom = 6.0
+rect_scale = Vector2( 0.25, 0.25 )
+text = "I'm walking here"

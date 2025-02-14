@@ -30,7 +30,7 @@ public partial class Character : KinematicBody2D
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite>("AnimatedSprite");
-		speedBoostUI = GetNode<SpeedBoostUI>("../SpeedBoostUI"); // Adjust the path as needed
+		speedBoostUI = GetNode<SpeedBoostUI>("/root/Main/UI/SpeedBoostUI"); // Adjust the path as needed
 		speedBoostUI.SetPlayer(this);
 		originalSpeed = Speed;
 		Position = Position.Snapped(Vector2.One * GridSize);
@@ -103,6 +103,11 @@ public partial class Character : KinematicBody2D
 		
 		if (collision != null)
 		{
+			if (collision.Collider is NPC npc)
+			{
+				npc.Bump();
+			}
+			
 			// Handle collision - stop movement and reset target position
 			targetPosition = Position;
 			isMoving = false;
@@ -126,7 +131,8 @@ public partial class Character : KinematicBody2D
 			Vector2 nextPosition = Position + (direction * GridSize);
 			var testMove = TestMove(GlobalTransform, direction * GridSize);
 			
-			if (!testMove)
+			// if (!testMove)
+			if (true)
 			{
 				targetPosition = nextPosition;
 				isMoving = true;

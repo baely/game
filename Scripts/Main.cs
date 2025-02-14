@@ -6,8 +6,8 @@ using System;
 /// </summary>
 public partial class Main : Node2D
 {
-    public override void _Ready()
-    {
-        // Initialize main game scene
-    }
+	public override void _Ready()
+	{
+		// Initialize main game scene
+	}
 }
