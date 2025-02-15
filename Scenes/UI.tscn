@@ -6,6 +6,7 @@
 [node name="UI" type="Node"]
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
+script = null
 
 [node name="SpeedBoostUI" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )

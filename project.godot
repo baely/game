@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="game"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -32,6 +32,7 @@ project/assembly_name="devgame"
 [global]
 
 default_clear_color=Color( 0.14, 0.14, 0.14, 1 )
+scene=false
 
 [gui]
 
