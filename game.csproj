@@ -3,7 +3,4 @@
     <TargetFramework>net472</TargetFramework>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="Scripts\responses.txt" />
-  </ItemGroup>
 </Project>
