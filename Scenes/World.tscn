@@ -784,7 +784,7 @@ format = 1
 [node name="NPCs" type="Node2D" parent="DN/YSort"]
 
 [node name="NPC2" parent="DN/YSort/NPCs" instance=ExtResource( 1 )]
-position = Vector2( 16, 0 )
+position = Vector2( 43, -21 )
 
 [node name="NPC" parent="DN/YSort/NPCs" instance=ExtResource( 1 )]
-position = Vector2( -16, 0 )
+position = Vector2( -41, -21 )
