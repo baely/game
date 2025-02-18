@@ -81,4 +81,4 @@ position = Vector2( 43, -21 )
 
 [node name="NPC" parent="DN/YSort/NPCs" instance=ExtResource( 1 )]
 position = Vector2( -44, -22 )
-CaresAboutBaileyBulterBeingInTheOffice = true
+CaresAboutBaileyButlerBeingInTheOffice = true
