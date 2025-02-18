@@ -1,33 +1,41 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 public class NPC : KinematicBody2D
 {
-    private float textTimeLeft = 0.0f;
-    private Control control;
+	[Export]
+	public bool CaresAboutBaileyBulterBeingInTheOffice { get; set; } 
+	
+	private bool _isBaileyButlerInTheOffice;
 
-	public override void _Ready()
-	{
-		control = GetNode<Control>("Control");
-	}
+    private float _textTimeLeft = 0.0f;
+    private Control _control;
+
+    public override void _Ready()
+    {
+	    _control = GetNode<Control>("Control");
+	    CheckIfBaileyButlerIsInTheOffice();
+    }
 
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
 
-		if (textTimeLeft > 0)
+		if (_textTimeLeft > 0)
 		{
-			textTimeLeft -= delta;
-			if (textTimeLeft <= 0)
+			_textTimeLeft -= delta;
+			if (_textTimeLeft <= 0)
 			{
-				control.Visible = false;
+				_control.Visible = false;
 			}
 		}
 	}
     public void Bump()
     {
-        if (textTimeLeft > 0)
+        if (_textTimeLeft > 0)
         {
             return;
         }
@@ -163,16 +171,41 @@ public class NPC : KinematicBody2D
             "You made me forget my hopes!", "I was just about to become a myth buster!", "You made me lose my harmony!",
             "I was just about to invent a new instrument!", "You made me drop my cake!", "I was just about to become a monster hunter!", "OI" };
         Random random = new Random();
-        string text = items[random.Next(items.Count)];
+        string text;
+        if (CaresAboutBaileyBulterBeingInTheOffice)
+        {
+	        text = _isBaileyButlerInTheOffice ? "thank god I found you. I need to let you know that Bailey Butler is in the office today. You should go say hi!" : "can't talk right now, too busy looking for Bailey Butler because he's sure as hell not in the office today.";
+        }
+        else
+        {
+	        text = items[random.Next(items.Count)];
+        }
+
         // Access the stored player name
         string playerName = Global.PlayerName;
         if (playerName.Length > 0)
         {
 	        text = playerName + " " + text;
         }
-        textTimeLeft = 3.0f;
+        _textTimeLeft = 3.0f;
 
-        control.Visible = true;
-        control.GetNode<Label>("Label").Text = text;
+        _control.Visible = true;
+        _control.GetNode<Label>("Label").Text = text;
+    }
+    
+    private async void CheckIfBaileyButlerIsInTheOffice()
+    {
+	    using (HttpClient client = new HttpClient())
+	    {
+		    try
+		    {
+			    string response = await client.GetStringAsync("https://isbaileybutlerintheoffice.today");
+			    _isBaileyButlerInTheOffice = response.Contains("<h1>yes</h1>");
+		    }
+		    catch (Exception ex)
+		    {
+			    GD.PrintErr("Error checking if Bailey Butler is in the office: ", ex.Message);
+		    }
+	    }
     }
 }
