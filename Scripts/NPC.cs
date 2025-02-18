@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class NPC : KinematicBody2D
 {
 	[Export]
-	public bool CaresAboutBaileyBulterBeingInTheOffice { get; set; } 
+	public bool CaresAboutBaileyButlerBeingInTheOffice { get; set; } 
 	
 	private bool _isBaileyButlerInTheOffice;
 
@@ -172,7 +172,7 @@ public class NPC : KinematicBody2D
             "I was just about to invent a new instrument!", "You made me drop my cake!", "I was just about to become a monster hunter!", "OI" };
         Random random = new Random();
         string text;
-        if (CaresAboutBaileyBulterBeingInTheOffice)
+        if (CaresAboutBaileyButlerBeingInTheOffice)
         {
 	        text = _isBaileyButlerInTheOffice ? "thank god I found you. I need to let you know that Bailey Butler is in the office today. You should go say hi!" : "can't talk right now, too busy looking for Bailey Butler because he's sure as hell not in the office today.";
         }
