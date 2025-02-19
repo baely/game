@@ -34,6 +34,10 @@ public partial class Player : Character {
 		if (Input.IsActionPressed(UiDown))
 			inputVector.y += 1;
 
+		ShiftMultiplier = 1.0f;
+		if (Input.IsActionPressed("ui_shift"))
+			ShiftMultiplier = 4.0f;
+		
 		if (inputVector.Length() > 1)
 			return Vector2.Zero;
 		

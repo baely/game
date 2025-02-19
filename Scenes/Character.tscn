@@ -14,11 +14,17 @@ extents = Vector2( 7, 7 )
 position = Vector2( 0, -5 )
 frames = ExtResource( 1 )
 animation = "idle"
-speed_scale = 2.4
+speed_scale = 1.8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 58 )
+
+[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D"]
+visible = false
+position = Vector2( -7, 0.8 )
+scale = Vector2( 2.33333, 2.6 )
+polygon = PoolVector2Array( 0, 2.38462, 6, 2.38462, 6, -3, 0, -3 )
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource( 59 )

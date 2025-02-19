@@ -10,9 +10,15 @@ public partial class Character : KinematicBody2D
 {
 	private float _speedMultiplier = 1;
 	private float _speedDurationRemaining = 0;
+	
+	private float _shiftMultiplier = 1;
+	public float ShiftMultiplier
+	{
+		set => _shiftMultiplier = value;
+	}
 
 	private const float GridSize = 16;
-	private const float Speed = 64;
+	private const float Speed = 48;
 	private Vector2 _targetPosition;
 
 	private const float BufferTimeMax = 0.05f;
@@ -21,12 +27,14 @@ public partial class Character : KinematicBody2D
 	
 	private ShapeCast2D _shapeCast;
 	private AnimatedSprite _animatedSprite;
-
-	private const float AnimationSpeed = 10 / 4;
+	
+	private const float AnimationSpeed = 1.2f * Speed/GridSize;
 	private string _currentAnimation = "idle";
 	private string _currentDirection = "";
 	private bool _currentFlip = false;
 	private Vector2 _animationVector = Vector2.Zero;
+
+	private CollisionShape2D _collider;
 
 	private const string Idle = "idle";
 	private const string Walk = "walk";
@@ -56,7 +64,8 @@ public partial class Character : KinematicBody2D
 	{
 		_shapeCast = GetNode<ShapeCast2D>("ShapeCast2D");
 		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
-
+		_collider = GetNode<CollisionShape2D>("CollisionShape2D");
+		
 		_animatedSprite.SpeedScale = AnimationSpeed;
 		
 		_targetPosition = Position;
@@ -80,8 +89,6 @@ public partial class Character : KinematicBody2D
 
 	private void ProcessSpeedBoost(float delta)
 	{
-		_animatedSprite.SpeedScale = _speedMultiplier;
-		
 		if (_speedDurationRemaining <= 0)
 		{
 			_speedMultiplier = 1;
@@ -99,7 +106,7 @@ public partial class Character : KinematicBody2D
 		ProcessInput(delta);
 
 		_animatedSprite.Animation = _currentAnimation + _currentDirection;
-		_animatedSprite.SpeedScale = AnimationSpeed * _speedMultiplier;
+		_animatedSprite.SpeedScale = AnimationSpeed * _speedMultiplier * _shiftMultiplier;
 		_animatedSprite.FlipH = _currentFlip;
 	}
 
@@ -107,17 +114,19 @@ public partial class Character : KinematicBody2D
 	{
 		var path = _targetPosition - Position;
 
-		var step = delta * Speed * _speedMultiplier;
+		var step = delta * Speed * _speedMultiplier * _shiftMultiplier;
 		var distance = path.Length();
 		
 		if (path == Vector2.Zero || step > distance)
 		{
 			Position = _targetPosition;
+			_collider.Position = Vector2.Zero;
 			return;
 		}
 
 		var direction = path.Normalized();
 		Position += direction * step;
+		_collider.Position -= direction * step;
 	}
 	
 	private void UpdateAnimation()
@@ -159,7 +168,10 @@ public partial class Character : KinematicBody2D
 			return;
 		}
 
+		GetPositionInParent();
+
 		_targetPosition = targetPosition;
+		_collider.Position += targetVector;
 		_bufferedVector = Vector2.Zero;
 	}
 
