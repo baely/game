@@ -8,6 +8,7 @@ public partial class Main : Node2D
 {
 	public override void _Ready()
 	{
-		// Initialize main game scene
+		var controller = GetNode<GameController>("GameController");
+		Global.Controller = controller;
 	}
 }

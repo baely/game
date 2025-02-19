@@ -219,8 +219,8 @@ public class NPC : Character, Bumper
 		}
 	}
 
-	private const float MoveWaitTime = 3f;
-	private float _nextMoveWaitTime = 3f;
+	private const float MoveWaitTime = 300f;
+	private float _nextMoveWaitTime = 300f;
 	
 	private static readonly Vector2[] Vectors = {Vector2.Left, Vector2.Right, Vector2.Up, Vector2.Down};
 

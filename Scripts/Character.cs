@@ -55,11 +55,6 @@ public partial class Character : KinematicBody2D
 		{ Vector2.Down, false }
 	};
 	
-	private const string UiLeft = "ui_left";
-	private const string UiRight = "ui_right";
-	private const string UiUp = "ui_up";
-	private const string UiDown = "ui_down";
-	
 	public override void _Ready()
 	{
 		_shapeCast = GetNode<ShapeCast2D>("ShapeCast2D");
@@ -69,6 +64,12 @@ public partial class Character : KinematicBody2D
 		_animatedSprite.SpeedScale = AnimationSpeed;
 		
 		_targetPosition = Position;
+	}
+	
+	public void Teleport(Vector2 position)
+	{
+		Position = position;
+		_targetPosition = position;
 	}
 
 	/// <summary>
@@ -159,6 +160,8 @@ public partial class Character : KinematicBody2D
 
 		if (_shapeCast.IsColliding())
 		{
+			var c = _shapeCast.GetCollider(0);
+			
 			if (_shapeCast.GetCollider(0) is Bumper bumper)
 			{
 				bumper.Bump();

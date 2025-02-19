@@ -6,7 +6,7 @@ public partial class Player : Character {
 	private const string UiRight = "ui_right";
 	private const string UiUp = "ui_up";
 	private const string UiDown = "ui_down";
-
+	
 	public override void _PhysicsProcess(float delta)
 	{
 		Vector2 inputVector = GetInputVector();
