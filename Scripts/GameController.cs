@@ -35,14 +35,14 @@ public class GameController : Node
 			var parent = currentPlayer.GetParent();
 			parent.RemoveChild(currentPlayer);
 		}
-
+		
 		if (level != null)
 			level.QueueFree();
 		
 		var ls = GD.Load<PackedScene>($"res://Scenes/{scene}.tscn");
 		level = ls.Instance<Node2D>();
 		levelParent.AddChild(level);
-
+		
 		var ySort = level.GetNode("Characters");
 
 		if (currentPlayer == null)

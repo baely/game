@@ -28,7 +28,7 @@ public partial class Character : KinematicBody2D
 	private ShapeCast2D _shapeCast;
 	private AnimatedSprite _animatedSprite;
 	
-	private const float AnimationSpeed = 1.2f * Speed/GridSize;
+	private const float AnimationSpeed = 0.8f * Speed/GridSize;
 	private string _currentAnimation = "idle";
 	private string _currentDirection = "";
 	private bool _currentFlip = false;
