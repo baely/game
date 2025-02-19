@@ -1,8 +1,8 @@
 name: "Godot CI/CD Export and Deploy"
 on:
-  push:
-    branches:
-      - master
+#  push:
+#    branches:
+#      - master
   workflow_dispatch:
 
 env:
