@@ -1,41 +1,65 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Object = Godot.Object;
 
 /// <summary>
 /// Represents a player character that can move on a grid-based system using MoveAndCollide
 /// </summary>
 public partial class Character : KinematicBody2D
 {
-	private const float POSITION_THRESHOLD = 1.0f;
-	private const string DIRECTION_DOWN = "down";
-	private const string DIRECTION_UP = "up";
-	private const string DIRECTION_SIDE = "side";
+	private float _speedMultiplier = 1;
+	private float _speedDurationRemaining = 0;
 
-	[Export]
-	public int GridSize { get; set; } = 16;
+	private const float GridSize = 16;
+	private const float Speed = 64;
+	private Vector2 _targetPosition;
 
-	[Export]
-	public float Speed { get; set; } = 32.0f;
+	private const float BufferTimeMax = 0.05f;
+	private Vector2 _bufferedVector = Vector2.Zero;
+	private float _bufferTimeRemaining = 0;
+	
+	private ShapeCast2D _shapeCast;
+	private AnimatedSprite _animatedSprite;
 
-	private bool isMoving = false;
-	private Vector2 targetPosition = Vector2.Zero;
-	private Vector2 velocity = Vector2.Zero;
-	private string lastDirection = DIRECTION_DOWN;
-	private float originalSpeed;
-	private float speedMultiplier = 1.0f;
-	private float speedBoostTimeLeft = 0.0f;
-	private AnimatedSprite sprite;
-	private SpeedBoostUI speedBoostUI;
+	private const float AnimationSpeed = 10 / 4;
+	private string _currentAnimation = "idle";
+	private string _currentDirection = "";
+	private bool _currentFlip = false;
+	private Vector2 _animationVector = Vector2.Zero;
 
+	private const string Idle = "idle";
+	private const string Walk = "walk";
+	
+	private static readonly Godot.Collections.Dictionary<Vector2, string> DirectionAnimations = new Godot.Collections.Dictionary<Vector2, string>
+	{
+		{ Vector2.Left, "_side" },
+		{ Vector2.Right, "_side" },
+		{ Vector2.Up, "_back" },
+		{ Vector2.Down, "" }
+	};
+	
+	private static readonly Godot.Collections.Dictionary<Vector2, bool> DirectionFlip = new Godot.Collections.Dictionary<Vector2, bool>
+	{
+		{ Vector2.Left, true },
+		{ Vector2.Right, false },
+		{ Vector2.Up, false },
+		{ Vector2.Down, false }
+	};
+	
+	private const string UiLeft = "ui_left";
+	private const string UiRight = "ui_right";
+	private const string UiUp = "ui_up";
+	private const string UiDown = "ui_down";
+	
 	public override void _Ready()
 	{
-		sprite = GetNode<AnimatedSprite>("AnimatedSprite");
-		speedBoostUI = GetNode<SpeedBoostUI>("/root/Main/UI/SpeedBoostUI"); // Adjust the path as needed
-		speedBoostUI.SetPlayer(this);
-		originalSpeed = Speed;
-		Position = Position.Snapped(Vector2.One * GridSize);
-		targetPosition = Position;
-		PlayIdleAnimation();
+		_shapeCast = GetNode<ShapeCast2D>("ShapeCast2D");
+		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+
+		_animatedSprite.SpeedScale = AnimationSpeed;
+		
+		_targetPosition = Position;
 	}
 
 	/// <summary>
@@ -45,11 +69,8 @@ public partial class Character : KinematicBody2D
 	/// <param name="duration">Duration of the speed boost in seconds</param>
 	public void ApplySpeedBoost(float multiplier, float duration)
 	{
-		speedMultiplier = multiplier;
-		speedBoostTimeLeft = duration;
-		Speed = originalSpeed * speedMultiplier;
-		sprite.SpeedScale = speedMultiplier;
-		speedBoostUI.ShowBoostTimer(duration);
+		_speedMultiplier = multiplier;
+		_speedDurationRemaining = duration;
 	}
 
 	public override void _Process(float delta)
@@ -57,143 +78,110 @@ public partial class Character : KinematicBody2D
 		ProcessSpeedBoost(delta);
 	}
 
-	public override void _PhysicsProcess(float delta)
-	{
-		if (isMoving)
-		{
-			ProcessMovement(delta);
-		}
-		else
-		{
-			ProcessInput();
-		}
-	}
-
 	private void ProcessSpeedBoost(float delta)
 	{
-		if (speedBoostTimeLeft > 0)
+		_animatedSprite.SpeedScale = _speedMultiplier;
+		
+		if (_speedDurationRemaining <= 0)
 		{
-			speedBoostTimeLeft -= delta;
-			speedBoostUI.UpdateBoostTimer(speedBoostTimeLeft);
-			if (speedBoostTimeLeft <= 1)
-			{
-				Speed = originalSpeed * ((speedMultiplier - 1) * speedBoostTimeLeft + 1);
-				sprite.SpeedScale = (speedMultiplier - 1) * speedBoostTimeLeft + 1;
-			}
-			if (speedBoostTimeLeft <= 0)
-			{
-				ResetSpeedBoost();
-			}
+			_speedMultiplier = 1;
+			return;
 		}
+
+		_speedDurationRemaining -= delta;
+	}
+	
+	public override void _PhysicsProcess(float delta)
+	{
+		ProcessBuffer();
+		ProcessMove(delta);
+		UpdateAnimation();
+		ProcessInput(delta);
+
+		_animatedSprite.Animation = _currentAnimation + _currentDirection;
+		_animatedSprite.SpeedScale = AnimationSpeed * _speedMultiplier;
+		_animatedSprite.FlipH = _currentFlip;
 	}
 
-	private void ResetSpeedBoost()
+	private void ProcessMove(float delta)
 	{
-		speedMultiplier = 1.0f;
-		Speed = originalSpeed;
-		sprite.SpeedScale = 1.0f;
-	}
+		var path = _targetPosition - Position;
 
-	private void ProcessMovement(float delta)
-	{
-		Vector2 moveDirection = (targetPosition - Position).Normalized();
-		velocity = moveDirection * Speed;
+		var step = delta * Speed * _speedMultiplier;
+		var distance = path.Length();
 		
-		KinematicCollision2D collision = MoveAndCollide(velocity * delta);
-		
-		if (collision != null)
+		if (path == Vector2.Zero || step > distance)
 		{
-			if (collision.Collider is NPC npc)
+			Position = _targetPosition;
+			return;
+		}
+
+		var direction = path.Normalized();
+		Position += direction * step;
+	}
+	
+	private void UpdateAnimation()
+	{
+		if (_animationVector == Vector2.Zero)
+		{
+			return;
+		}
+		
+		_currentDirection = DirectionAnimations[_animationVector];
+		_currentAnimation = (Position == _targetPosition) ? Idle : Walk;
+		_currentFlip = DirectionFlip[_animationVector];
+	}
+
+	private void ProcessBuffer()
+	{
+		if (Position != _targetPosition)
+			return;
+
+		if (_bufferedVector == Vector2.Zero)
+			return;
+		
+		_animationVector = _bufferedVector;
+		
+		var targetVector = _bufferedVector * GridSize;
+		var targetPosition = Position + targetVector;
+
+		_shapeCast.TargetPosition = targetVector;
+		_shapeCast.ForceShapecastUpdate();
+
+		if (_shapeCast.IsColliding())
+		{
+			if (_shapeCast.GetCollider(0) is Bumper bumper)
 			{
-				npc.Bump();
+				bumper.Bump();
 			}
 			
-			// Handle collision - stop movement and reset target position
-			targetPosition = Position;
-			isMoving = false;
-			PlayIdleAnimation();
+			_bufferedVector = Vector2.Zero;
+			return;
 		}
-		else if (Position.DistanceTo(targetPosition) < POSITION_THRESHOLD)
-		{
-			Position = targetPosition;
-			isMoving = false;
-			PlayIdleAnimation();
-		}
+
+		_targetPosition = targetPosition;
+		_bufferedVector = Vector2.Zero;
 	}
 
-	private void ProcessInput()
+	public Vector2 InputVector
 	{
-		Vector2 direction = GetInputDirection();
-		
-		if (direction != Vector2.Zero)
+		set
 		{
-			// Check if the next position is valid before moving
-			Vector2 nextPosition = Position + (direction * GridSize);
-			var testMove = TestMove(GlobalTransform, direction * GridSize);
-			
-			// if (!testMove)
-			if (true)
-			{
-				targetPosition = nextPosition;
-				isMoving = true;
-				PlayWalkAnimation();
-			}
+			_bufferedVector = value;
+			_bufferTimeRemaining = BufferTimeMax;
 		}
 	}
 
-	private Vector2 GetInputDirection()
+	private void ProcessInput(float delta)
 	{
-		Vector2 direction = Vector2.Zero;
-		
-		if (Input.IsActionPressed("ui_right"))
-		{
-			direction.x += 1;
-			sprite.FlipH = false;
-			lastDirection = DIRECTION_SIDE;
-		}
-		else if (Input.IsActionPressed("ui_left"))
-		{
-			direction.x -= 1;
-			sprite.FlipH = true;
-			lastDirection = DIRECTION_SIDE;
-		}
-		else if (Input.IsActionPressed("ui_up"))
-		{
-			direction.y -= 1;
-			lastDirection = DIRECTION_UP;
-		}
-		else if (Input.IsActionPressed("ui_down"))
-		{
-			direction.y += 1;
-			lastDirection = DIRECTION_DOWN;
-		}
-
-		return direction;
+		if (_bufferTimeRemaining <= 0)
+			_bufferedVector = Vector2.Zero;
+		else
+			_bufferTimeRemaining -= delta;
 	}
+}
 
-	private void PlayIdleAnimation()
-	{
-		string nextAnimation = lastDirection switch
-		{
-			DIRECTION_DOWN => "idle",
-			DIRECTION_UP => "idle_back",
-			DIRECTION_SIDE => "idle_side",
-			_ => "idle"
-		};
-
-		sprite.Animation = nextAnimation;
-	}
-
-	private void PlayWalkAnimation()
-	{
-		string animation = lastDirection switch
-		{
-			DIRECTION_DOWN => "walk",
-			DIRECTION_UP => "walk_back",
-			DIRECTION_SIDE => "walk_side",
-			_ => "walk"
-		};
-		
-		sprite.Animation = animation;
-	}
+public interface Bumper
+{
+	public void Bump();
 }

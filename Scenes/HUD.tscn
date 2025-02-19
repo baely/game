@@ -6,21 +6,22 @@ using System;
 
 public class HUD : CanvasLayer
 {
-    private LineEdit nameInput;
+	private LineEdit nameInput;
 
-    public override void _Ready()
-    {
-        nameInput = GetNode<LineEdit>(\"LineEdit\");
-        nameInput.Connect(\"text_entered\", this, nameof(OnNameEntered));
-    }
+	public override void _Ready()
+	{
+		nameInput = GetNode<LineEdit>(\"LineEdit\");
+		nameInput.Connect(\"text_entered\", this, nameof(OnNameEntered));
+	}
 
-    private void OnNameEntered(string text)
-    {
-        GD.Print(\"User entered name: \" + text);
-        // Store the entered name in the Global singleton
-        Global.PlayerName = text;
-    }
-}"
+	private void OnNameEntered(string text)
+	{
+		GD.Print(\"User entered name: \" + text);
+		// Store the entered name in the Global singleton
+		Global.PlayerName = text;
+	}
+}
+"
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.141176, 0.741176, 0.290196, 1 )
